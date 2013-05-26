@@ -1,4 +1,4 @@
-$('#open-popup').magnificPopup({
+$('.open-popup').magnificPopup({
     items: [
       {
         src: 'assets/img/1.jpg',
