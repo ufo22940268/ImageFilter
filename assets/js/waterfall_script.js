@@ -128,7 +128,7 @@
             var cell = document.createElement('div');
             var realPhotoPath = "assets/img/" + data[j].s + ".jpg";
             cell.className = 'cell';
-            cell.innerHTML = '<p><a href="javascript:;" onclick="replacePhoto(\'' + realPhotoPath +'\')"><img src="' + realPhotoPath+ '" height="' + data[j].h + '" width="190" /></a></p><h2><a href="#">' + data[j].s + '.jpg</a></h2><span class="like">Like!</span><span class="mark">Mark!</span>';
+            cell.innerHTML = '<p><a href="#myModal" role="button" class="btn" data-toggle="modal" onclick="replacePhoto(\'' + realPhotoPath + '\')")><img src="' + realPhotoPath+ '" height="' + data[j].h + '" width="190" /></a></p><h2><a href="#">' + data[j].s + '.jpg</a></h2><span class="like">Like!</span><span class="mark">Mark!</span>';
             cells.push(cell);
             fragment.appendChild(cell);
         }
