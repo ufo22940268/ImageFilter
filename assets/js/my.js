@@ -31,5 +31,6 @@ cell.innerHTML = html;
 $(".span12").append(cell);
 
 function replacePhoto(res) {
-    $("#modal-photo").attr("src", res);
+    var newCss =  "url('" + res + "')";
+    $('#main-photo-container').css('background-image', newCss);
 }

@@ -340,7 +340,7 @@ set lazyredraw
 set matchtime=8
 set modelines=0
 set mouse=a
-set path=.,/usr/include,,,res/layout,res/layout-finger,res/values,res/drawable,res/drawable-mdpi,res/drawable-hdpi,res/menu,assets
+set path=.,/usr/include,,,res/layout,res/layout-finger,res/values,res/drawable,res/drawable-mdpi,res/drawable-hdpi,res/menu,assets,assets/css/
 set ruler
 set runtimepath=~/.vim/bundle/vim-fugitive,~/.vim/bundle/command-t,~/.vim/bundle/vim-powerline,~/.vim/bundle/vim-surround,~/.vim/bundle/Conque-Shell,~/.vim/bundle/tabular,~/.vim/bundle/nerdcommenter,~/.vim/bundle/glsl.vim,~/.vim/bundle/tabular,~/.vim/bundle/logcat,~/.vim/bundle/glsl.vim,~/.vim/bundle/vim-java-get-set,~/.vim/bundle/zencoding-vim,~/.vim/bundle/jshint.vim,~/.vim/bundle/vim-colors-solarized,~/.vim/bundle/textobj-word-column.vim,~/.vim/bundle/renamer.vim,~/.vim/bundle/rename.vim,~/.vim/bundle/tagbar,~/.vim,/usr/share/vim/vimfiles,/usr/share/vim/vim73,/usr/share/vim/vimfiles/after,~/.vim/after,~/.vim/bundle/vundle/,~/.vim/bundle/vim-fugitive/after,~/.vim/bundle/command-t/after,~/.vim/bundle/vim-powerline/after,~/.vim/bundle/vim-surround/after,~/.vim/bundle/Conque-Shell/after,~/.vim/bundle/tabular/after,~/.vim/bundle/nerdcommenter/after,~/.vim/bundle/glsl.vim/after,~/.vim/bundle/tabular/after,~/.vim/bundle/logcat/after,~/.vim/bundle/glsl.vim/after,~/.vim/bundle/vim-java-get-set/after,~/.vim/bundle/zencoding-vim/af
 set scrolloff=7
@@ -368,16 +368,10 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +26 ~/workspace/ImageFilter/test.html
-badd +36 ~/workspace/ImageFilter/waterfall.html
-badd +0 ~/workspace/ImageFilter/assets/js/waterfall_script.js
+badd +1 ~/workspace/ImageFilter/index.html
 args ~/workspace/ImageFilter/index.html
-edit ~/workspace/ImageFilter/test.html
+edit ~/workspace/ImageFilter/index.html
 set splitbelow splitright
-wincmd _ | wincmd |
-vsplit
-1wincmd h
-wincmd w
 wincmd _ | wincmd |
 split
 1wincmd k
@@ -388,6 +382,14 @@ wincmd t
 set winheight=1 winwidth=1
 wincmd =
 argglobal
+let s:cpo_save=&cpo
+set cpo&vim
+map <buffer> \b <Plug>JavagetsetInsertBothGetterSetter
+map <buffer> \s <Plug>JavagetsetInsertSetterOnly
+map <buffer> \g <Plug>JavagetsetInsertGetterOnly
+map <buffer> \p <Plug>JavagetsetInsertGetterSetter
+let &cpo=s:cpo_save
+unlet s:cpo_save
 setlocal autoindent
 setlocal nobinary
 setlocal bufhidden=
@@ -464,226 +466,18 @@ setlocal noshortname
 setlocal smartindent
 setlocal softtabstop=4
 setlocal nospell
-setlocal spellcapcheck=
-setlocal spellfile=
-setlocal spelllang=en
-setlocal statusline=%!Pl#Statusline(0,0)
-setlocal suffixesadd=.java,.xml,.9.png,.png
-setlocal noswapfile
-setlocal synmaxcol=3000
-if &syntax != 'html'
-setlocal syntax=html
-endif
-setlocal tabstop=8
-setlocal tags=~/workspace/ImageFilter/.git/html.tags,~/workspace/ImageFilter/.git/tags,./tags,tags
-setlocal textwidth=0
-setlocal thesaurus=
-setlocal noundofile
-setlocal nowinfixheight
-setlocal nowinfixwidth
-setlocal wrap
-setlocal wrapmargin=0
-let s:l = 14 - ((10 * winheight(0) + 15) / 31)
-if s:l < 1 | let s:l = 1 | endif
-exe s:l
-normal! zt
-14
-normal! 0
-wincmd w
-argglobal
-edit ~/workspace/ImageFilter/waterfall.html
-setlocal autoindent
-setlocal nobinary
-setlocal bufhidden=
-setlocal buflisted
-setlocal buftype=
-setlocal cindent
-setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
-setlocal cinoptions=l1
-setlocal cinwords=if,else,while,do,for,switch
-setlocal colorcolumn=
-setlocal comments=s:<!--,m:\ \ \ \ ,e:-->
-setlocal commentstring=<!--%s-->
-setlocal complete=.,w,b,u,t,i
-setlocal completefunc=
-setlocal nocopyindent
-setlocal cryptmethod=
-setlocal nocursorbind
-setlocal nocursorcolumn
-setlocal nocursorline
-setlocal define=
-setlocal dictionary=
-setlocal nodiff
-setlocal equalprg=
-setlocal errorformat=
-setlocal expandtab
-if &filetype != 'html'
-setlocal filetype=html
-endif
-setlocal foldcolumn=0
-setlocal foldenable
-setlocal foldexpr=0
-setlocal foldignore=#
-setlocal foldlevel=0
-setlocal foldmarker={{{,}}}
-setlocal foldmethod=manual
-setlocal foldminlines=1
-setlocal foldnestmax=20
-setlocal foldtext=foldtext()
-setlocal formatexpr=
-setlocal formatoptions=tcq
-setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
-setlocal grepprg=
-setlocal iminsert=0
-setlocal imsearch=0
-setlocal include=
-setlocal includeexpr=
-setlocal indentexpr=HtmlIndentGet(v:lnum)
-setlocal indentkeys=o,O,*<Return>,<>>,{,}
-setlocal noinfercase
-setlocal iskeyword=@,48-57,_,192-255
-setlocal keywordprg=
-set linebreak
-setlocal linebreak
-setlocal nolisp
-setlocal nolist
-setlocal makeprg=
-setlocal matchpairs=(:),{:},[:],<:>
-setlocal modeline
-setlocal modifiable
-setlocal nrformats=octal,hex
-set number
-setlocal number
-setlocal numberwidth=4
-setlocal omnifunc=htmlcomplete#CompleteTags
-setlocal path=
-setlocal nopreserveindent
-setlocal nopreviewwindow
-setlocal quoteescape=\\
-setlocal noreadonly
-setlocal norelativenumber
-setlocal noscrollbind
-setlocal shiftwidth=4
-setlocal noshortname
-setlocal smartindent
-setlocal softtabstop=4
-setlocal nospell
-setlocal spellcapcheck=
-setlocal spellfile=
-setlocal spelllang=en
-setlocal statusline=%!Pl#Statusline(0,0)
-setlocal suffixesadd=.java,.xml,.9.png,.png
-setlocal noswapfile
-setlocal synmaxcol=3000
-if &syntax != 'html'
-setlocal syntax=html
-endif
-setlocal tabstop=8
-setlocal tags=~/workspace/ImageFilter/.git/html.tags,~/workspace/ImageFilter/.git/tags,./tags,tags
-setlocal textwidth=0
-setlocal thesaurus=
-setlocal noundofile
-setlocal nowinfixheight
-setlocal nowinfixwidth
-setlocal wrap
-setlocal wrapmargin=0
-let s:l = 22 - ((7 * winheight(0) + 7) / 15)
-if s:l < 1 | let s:l = 1 | endif
-exe s:l
-normal! zt
-22
-normal! 04l
-wincmd w
-argglobal
-edit ~/workspace/ImageFilter/assets/js/waterfall_script.js
-setlocal autoindent
-setlocal nobinary
-setlocal bufhidden=
-setlocal buflisted
-setlocal buftype=
-setlocal cindent
-setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
-setlocal cinoptions=l1,j1,J1
-setlocal cinwords=if,else,while,do,for,switch
-setlocal colorcolumn=
-setlocal comments=sO:*\ -,mO:*\ \ ,exO:*/,s1:/*,mb:*,ex:*/,://
-setlocal commentstring=//%s
-setlocal complete=.,w,b,u,t,i
-setlocal completefunc=
-setlocal nocopyindent
-setlocal cryptmethod=
-setlocal nocursorbind
-setlocal nocursorcolumn
-setlocal nocursorline
-setlocal define=
-setlocal dictionary=
-setlocal nodiff
-setlocal equalprg=
-setlocal errorformat=
-setlocal expandtab
-if &filetype != 'javascript'
-setlocal filetype=javascript
-endif
-setlocal foldcolumn=0
-setlocal foldenable
-setlocal foldexpr=0
-setlocal foldignore=#
-setlocal foldlevel=0
-setlocal foldmarker={{{,}}}
-setlocal foldmethod=manual
-setlocal foldminlines=1
-setlocal foldnestmax=20
-setlocal foldtext=foldtext()
-setlocal formatexpr=
-setlocal formatoptions=croql
-setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
-setlocal grepprg=
-setlocal iminsert=0
-setlocal imsearch=0
-setlocal include=
-setlocal includeexpr=
-setlocal indentexpr=
-setlocal indentkeys=0{,0},:,0#,!^F,o,O,e
-setlocal noinfercase
-setlocal iskeyword=@,48-57,_,192-255
-setlocal keywordprg=
-set linebreak
-setlocal linebreak
-setlocal nolisp
-setlocal nolist
-setlocal makeprg=
-setlocal matchpairs=(:),{:},[:]
-setlocal modeline
-setlocal modifiable
-setlocal nrformats=octal,hex
-set number
-setlocal number
-setlocal numberwidth=4
-setlocal omnifunc=javascriptcomplete#CompleteJS
-setlocal path=
-setlocal nopreserveindent
-setlocal nopreviewwindow
-setlocal quoteescape=\\
-setlocal noreadonly
-setlocal norelativenumber
-setlocal noscrollbind
-setlocal shiftwidth=4
-setlocal noshortname
-setlocal smartindent
-setlocal softtabstop=4
-setlocal nospell
-setlocal spellcapcheck=
+setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
 setlocal spellfile=
 setlocal spelllang=en
 setlocal statusline=%!Pl#Statusline(0,1)
 setlocal suffixesadd=.java,.xml,.9.png,.png
 setlocal noswapfile
 setlocal synmaxcol=3000
-if &syntax != 'javascript'
-setlocal syntax=javascript
+if &syntax != 'html'
+setlocal syntax=html
 endif
 setlocal tabstop=8
-setlocal tags=~/workspace/ImageFilter/.git/javascript.tags,~/workspace/ImageFilter/.git/tags,./tags,tags
+setlocal tags=~/workspace/ImageFilter/.git/html.tags,~/workspace/ImageFilter/.git/tags,./tags,tags
 setlocal textwidth=0
 setlocal thesaurus=
 setlocal noundofile
@@ -691,14 +485,125 @@ setlocal nowinfixheight
 setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
-let s:l = 129 - ((7 * winheight(0) + 7) / 15)
+let s:l = 99 - ((7 * winheight(0) + 9) / 19)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-129
-normal! 012l
+99
+normal! 068l
 wincmd w
-3wincmd w
+argglobal
+edit ~/workspace/ImageFilter/index.html
+let s:cpo_save=&cpo
+set cpo&vim
+map <buffer> \b <Plug>JavagetsetInsertBothGetterSetter
+map <buffer> \s <Plug>JavagetsetInsertSetterOnly
+map <buffer> \g <Plug>JavagetsetInsertGetterOnly
+map <buffer> \p <Plug>JavagetsetInsertGetterSetter
+let &cpo=s:cpo_save
+unlet s:cpo_save
+setlocal autoindent
+setlocal nobinary
+setlocal bufhidden=
+setlocal buflisted
+setlocal buftype=
+setlocal cindent
+setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
+setlocal cinoptions=l1
+setlocal cinwords=if,else,while,do,for,switch
+setlocal colorcolumn=
+setlocal comments=s:<!--,m:\ \ \ \ ,e:-->
+setlocal commentstring=<!--%s-->
+setlocal complete=.,w,b,u,t,i
+setlocal completefunc=
+setlocal nocopyindent
+setlocal cryptmethod=
+setlocal nocursorbind
+setlocal nocursorcolumn
+setlocal nocursorline
+setlocal define=
+setlocal dictionary=
+setlocal nodiff
+setlocal equalprg=
+setlocal errorformat=
+setlocal expandtab
+if &filetype != 'html'
+setlocal filetype=html
+endif
+setlocal foldcolumn=0
+setlocal foldenable
+setlocal foldexpr=0
+setlocal foldignore=#
+setlocal foldlevel=0
+setlocal foldmarker={{{,}}}
+setlocal foldmethod=manual
+setlocal foldminlines=1
+setlocal foldnestmax=20
+setlocal foldtext=foldtext()
+setlocal formatexpr=
+setlocal formatoptions=tcq
+setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
+setlocal grepprg=
+setlocal iminsert=0
+setlocal imsearch=0
+setlocal include=
+setlocal includeexpr=
+setlocal indentexpr=HtmlIndentGet(v:lnum)
+setlocal indentkeys=o,O,*<Return>,<>>,{,}
+setlocal noinfercase
+setlocal iskeyword=@,48-57,_,192-255
+setlocal keywordprg=
+set linebreak
+setlocal linebreak
+setlocal nolisp
+setlocal nolist
+setlocal makeprg=
+setlocal matchpairs=(:),{:},[:],<:>
+setlocal modeline
+setlocal modifiable
+setlocal nrformats=octal,hex
+set number
+setlocal number
+setlocal numberwidth=4
+setlocal omnifunc=htmlcomplete#CompleteTags
+setlocal path=
+setlocal nopreserveindent
+setlocal nopreviewwindow
+setlocal quoteescape=\\
+setlocal noreadonly
+setlocal norelativenumber
+setlocal noscrollbind
+setlocal shiftwidth=4
+setlocal noshortname
+setlocal smartindent
+setlocal softtabstop=4
+setlocal nospell
+setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
+setlocal spellfile=
+setlocal spelllang=en
+setlocal statusline=%!Pl#Statusline(0,0)
+setlocal suffixesadd=.java,.xml,.9.png,.png
+setlocal noswapfile
+setlocal synmaxcol=3000
+if &syntax != 'html'
+setlocal syntax=html
+endif
+setlocal tabstop=8
+setlocal tags=~/workspace/ImageFilter/.git/html.tags,~/workspace/ImageFilter/.git/tags,./tags,tags
+setlocal textwidth=0
+setlocal thesaurus=
+setlocal noundofile
+setlocal nowinfixheight
+setlocal nowinfixwidth
+setlocal wrap
+setlocal wrapmargin=0
+let s:l = 99 - ((14 * winheight(0) + 9) / 18)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+99
+normal! 068l
+wincmd w
 wincmd =
 if exists('s:wipebuf')
   silent exe 'bwipe ' . s:wipebuf
