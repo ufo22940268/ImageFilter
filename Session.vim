@@ -340,7 +340,7 @@ set lazyredraw
 set matchtime=8
 set modelines=0
 set mouse=a
-set path=.,/usr/include,,,res/layout,res/layout-finger,res/values,res/drawable,res/drawable-mdpi,res/drawable-hdpi,res/menu,assets,assets/css/
+set path=.,/usr/include,,,res/layout,res/layout-finger,res/values,res/drawable,res/drawable-mdpi,res/drawable-hdpi,res/menu,assets,assets/css/,assets/js/
 set ruler
 set runtimepath=~/.vim/bundle/vim-fugitive,~/.vim/bundle/command-t,~/.vim/bundle/vim-powerline,~/.vim/bundle/vim-surround,~/.vim/bundle/Conque-Shell,~/.vim/bundle/tabular,~/.vim/bundle/nerdcommenter,~/.vim/bundle/glsl.vim,~/.vim/bundle/tabular,~/.vim/bundle/logcat,~/.vim/bundle/glsl.vim,~/.vim/bundle/vim-java-get-set,~/.vim/bundle/zencoding-vim,~/.vim/bundle/jshint.vim,~/.vim/bundle/vim-colors-solarized,~/.vim/bundle/textobj-word-column.vim,~/.vim/bundle/renamer.vim,~/.vim/bundle/rename.vim,~/.vim/bundle/tagbar,~/.vim,/usr/share/vim/vimfiles,/usr/share/vim/vim73,/usr/share/vim/vimfiles/after,~/.vim/after,~/.vim/bundle/vundle/,~/.vim/bundle/vim-fugitive/after,~/.vim/bundle/command-t/after,~/.vim/bundle/vim-powerline/after,~/.vim/bundle/vim-surround/after,~/.vim/bundle/Conque-Shell/after,~/.vim/bundle/tabular/after,~/.vim/bundle/nerdcommenter/after,~/.vim/bundle/glsl.vim/after,~/.vim/bundle/tabular/after,~/.vim/bundle/logcat/after,~/.vim/bundle/glsl.vim/after,~/.vim/bundle/vim-java-get-set/after,~/.vim/bundle/zencoding-vim/af
 set scrolloff=7
@@ -368,13 +368,18 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +1 ~/workspace/ImageFilter/index.html
+badd +80 ~/workspace/ImageFilter/index.html
+badd +10 ~/workspace/ImageFilter/assets/css/my.css
 args ~/workspace/ImageFilter/index.html
-edit ~/workspace/ImageFilter/index.html
+edit ~/workspace/ImageFilter/assets/css/my.css
 set splitbelow splitright
 wincmd _ | wincmd |
 split
 1wincmd k
+wincmd _ | wincmd |
+vsplit
+1wincmd h
+wincmd w
 wincmd w
 set nosplitbelow
 set nosplitright
@@ -382,14 +387,6 @@ wincmd t
 set winheight=1 winwidth=1
 wincmd =
 argglobal
-let s:cpo_save=&cpo
-set cpo&vim
-map <buffer> \b <Plug>JavagetsetInsertBothGetterSetter
-map <buffer> \s <Plug>JavagetsetInsertSetterOnly
-map <buffer> \g <Plug>JavagetsetInsertGetterOnly
-map <buffer> \p <Plug>JavagetsetInsertGetterSetter
-let &cpo=s:cpo_save
-unlet s:cpo_save
 setlocal autoindent
 setlocal nobinary
 setlocal bufhidden=
@@ -400,8 +397,8 @@ setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
 setlocal cinoptions=l1
 setlocal cinwords=if,else,while,do,for,switch
 setlocal colorcolumn=
-setlocal comments=s:<!--,m:\ \ \ \ ,e:-->
-setlocal commentstring=<!--%s-->
+setlocal comments=s1:/*,mb:*,ex:*/
+setlocal commentstring=/*%s*/
 setlocal complete=.,w,b,u,t,i
 setlocal completefunc=
 setlocal nocopyindent
@@ -415,8 +412,8 @@ setlocal nodiff
 setlocal equalprg=
 setlocal errorformat=
 setlocal expandtab
-if &filetype != 'html'
-setlocal filetype=html
+if &filetype != 'css'
+setlocal filetype=css
 endif
 setlocal foldcolumn=0
 setlocal foldenable
@@ -429,15 +426,15 @@ setlocal foldminlines=1
 setlocal foldnestmax=20
 setlocal foldtext=foldtext()
 setlocal formatexpr=
-setlocal formatoptions=tcq
+setlocal formatoptions=croql
 setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
 setlocal grepprg=
 setlocal iminsert=0
 setlocal imsearch=0
-setlocal include=
+setlocal include=^\\s*@import\\s\\+\\%(url(\\)\\=
 setlocal includeexpr=
-setlocal indentexpr=HtmlIndentGet(v:lnum)
-setlocal indentkeys=o,O,*<Return>,<>>,{,}
+setlocal indentexpr=GetCSSIndent()
+setlocal indentkeys=0{,0},!^F,o,O
 setlocal noinfercase
 setlocal iskeyword=@,48-57,_,192-255
 setlocal keywordprg=
@@ -446,14 +443,14 @@ setlocal linebreak
 setlocal nolisp
 setlocal nolist
 setlocal makeprg=
-setlocal matchpairs=(:),{:},[:],<:>
+setlocal matchpairs=(:),{:},[:]
 setlocal modeline
 setlocal modifiable
 setlocal nrformats=octal,hex
 set number
 setlocal number
 setlocal numberwidth=4
-setlocal omnifunc=htmlcomplete#CompleteTags
+setlocal omnifunc=csscomplete#CompleteCSS
 setlocal path=
 setlocal nopreserveindent
 setlocal nopreviewwindow
@@ -463,21 +460,21 @@ setlocal norelativenumber
 setlocal noscrollbind
 setlocal shiftwidth=4
 setlocal noshortname
-setlocal smartindent
+setlocal nosmartindent
 setlocal softtabstop=4
 setlocal nospell
-setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
+setlocal spellcapcheck=
 setlocal spellfile=
 setlocal spelllang=en
-setlocal statusline=%!Pl#Statusline(0,1)
+setlocal statusline=%!Pl#Statusline(0,0)
 setlocal suffixesadd=.java,.xml,.9.png,.png
 setlocal noswapfile
 setlocal synmaxcol=3000
-if &syntax != 'html'
-setlocal syntax=html
+if &syntax != 'css'
+setlocal syntax=css
 endif
 setlocal tabstop=8
-setlocal tags=~/workspace/ImageFilter/.git/html.tags,~/workspace/ImageFilter/.git/tags,./tags,tags
+setlocal tags=~/workspace/ImageFilter/.git/css.tags,~/workspace/ImageFilter/.git/tags,./tags,tags
 setlocal textwidth=0
 setlocal thesaurus=
 setlocal noundofile
@@ -485,23 +482,119 @@ setlocal nowinfixheight
 setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
-let s:l = 99 - ((7 * winheight(0) + 9) / 19)
+let s:l = 40 - ((7 * winheight(0) + 9) / 19)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-99
-normal! 068l
+40
+normal! 0
+wincmd w
+argglobal
+edit ~/workspace/ImageFilter/assets/css/my.css
+setlocal autoindent
+setlocal nobinary
+setlocal bufhidden=
+setlocal buflisted
+setlocal buftype=
+setlocal cindent
+setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
+setlocal cinoptions=l1
+setlocal cinwords=if,else,while,do,for,switch
+setlocal colorcolumn=
+setlocal comments=s1:/*,mb:*,ex:*/
+setlocal commentstring=/*%s*/
+setlocal complete=.,w,b,u,t,i
+setlocal completefunc=
+setlocal nocopyindent
+setlocal cryptmethod=
+setlocal nocursorbind
+setlocal nocursorcolumn
+setlocal nocursorline
+setlocal define=
+setlocal dictionary=
+setlocal nodiff
+setlocal equalprg=
+setlocal errorformat=
+setlocal expandtab
+if &filetype != 'css'
+setlocal filetype=css
+endif
+setlocal foldcolumn=0
+setlocal foldenable
+setlocal foldexpr=0
+setlocal foldignore=#
+setlocal foldlevel=0
+setlocal foldmarker={{{,}}}
+setlocal foldmethod=manual
+setlocal foldminlines=1
+setlocal foldnestmax=20
+setlocal foldtext=foldtext()
+setlocal formatexpr=
+setlocal formatoptions=croql
+setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
+setlocal grepprg=
+setlocal iminsert=0
+setlocal imsearch=0
+setlocal include=^\\s*@import\\s\\+\\%(url(\\)\\=
+setlocal includeexpr=
+setlocal indentexpr=GetCSSIndent()
+setlocal indentkeys=0{,0},!^F,o,O
+setlocal noinfercase
+setlocal iskeyword=@,48-57,_,192-255
+setlocal keywordprg=
+set linebreak
+setlocal linebreak
+setlocal nolisp
+setlocal nolist
+setlocal makeprg=
+setlocal matchpairs=(:),{:},[:]
+setlocal modeline
+setlocal modifiable
+setlocal nrformats=octal,hex
+set number
+setlocal number
+setlocal numberwidth=4
+setlocal omnifunc=csscomplete#CompleteCSS
+setlocal path=
+setlocal nopreserveindent
+setlocal nopreviewwindow
+setlocal quoteescape=\\
+setlocal noreadonly
+setlocal norelativenumber
+setlocal noscrollbind
+setlocal shiftwidth=4
+setlocal noshortname
+setlocal nosmartindent
+setlocal softtabstop=4
+setlocal nospell
+setlocal spellcapcheck=
+setlocal spellfile=
+setlocal spelllang=en
+setlocal statusline=%!Pl#Statusline(0,1)
+setlocal suffixesadd=.java,.xml,.9.png,.png
+setlocal noswapfile
+setlocal synmaxcol=3000
+if &syntax != 'css'
+setlocal syntax=css
+endif
+setlocal tabstop=8
+setlocal tags=~/workspace/ImageFilter/.git/css.tags,~/workspace/ImageFilter/.git/tags,./tags,tags
+setlocal textwidth=0
+setlocal thesaurus=
+setlocal noundofile
+setlocal nowinfixheight
+setlocal nowinfixwidth
+setlocal wrap
+setlocal wrapmargin=0
+let s:l = 40 - ((16 * winheight(0) + 9) / 19)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+40
+normal! 0
 wincmd w
 argglobal
 edit ~/workspace/ImageFilter/index.html
-let s:cpo_save=&cpo
-set cpo&vim
-map <buffer> \b <Plug>JavagetsetInsertBothGetterSetter
-map <buffer> \s <Plug>JavagetsetInsertSetterOnly
-map <buffer> \g <Plug>JavagetsetInsertGetterOnly
-map <buffer> \p <Plug>JavagetsetInsertGetterSetter
-let &cpo=s:cpo_save
-unlet s:cpo_save
 setlocal autoindent
 setlocal nobinary
 setlocal bufhidden=
@@ -578,7 +671,7 @@ setlocal noshortname
 setlocal smartindent
 setlocal softtabstop=4
 setlocal nospell
-setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
+setlocal spellcapcheck=
 setlocal spellfile=
 setlocal spelllang=en
 setlocal statusline=%!Pl#Statusline(0,0)
@@ -597,13 +690,14 @@ setlocal nowinfixheight
 setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
-let s:l = 99 - ((14 * winheight(0) + 9) / 18)
+let s:l = 9 - ((8 * winheight(0) + 9) / 18)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-99
-normal! 068l
+9
+normal! 0
 wincmd w
+2wincmd w
 wincmd =
 if exists('s:wipebuf')
   silent exe 'bwipe ' . s:wipebuf

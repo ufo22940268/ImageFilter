@@ -28,7 +28,7 @@ for (var i = 1; i <= 20; i ++) {
     html += img;
 }
 cell.innerHTML = html;
-$(".span12").append(cell);
+$("#candidate-container").append(cell);
 
 function replacePhoto(res) {
     var newCss =  "url('" + res + "')";
